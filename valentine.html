@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kuchu Puchu ❤️ Proposal</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:Georgia, serif;
+background:#ffc0cb;
+color:#660033;
+text-align:center;
+}
+
+/* Floating Hearts */
+.heart{
+position:fixed;
+bottom:-50px;
+color:red;
+font-size:24px;
+animation:floatUp 12s linear forwards;
+z-index:0;
+opacity:0.8;
+}
+
+@keyframes floatUp{
+0%{
+transform:translateY(0);
+opacity:0.8;
+}
+100%{
+transform:translateY(-110vh);
+opacity:0;
+}
+}
+
+h1{
+margin-top:100px;
+font-size:50px;
+position:relative;
+z-index:2;
+}
+
+#message{
+font-size:22px;
+margin:20px 40px;
+min-height:60px;
+position:relative;
+z-index:2;
+}
+
+h2{
+position:relative;
+z-index:2;
+}
+
+button{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+margin:20px;
+transition:0.3s;
+position:relative;
+z-index:2;
+}
+
+.yes{
+background:white;
+color:red;
+font-weight:bold;
+}
+
+.no{
+background:#660033;
+color:white;
+position:absolute;
+}
+
+/* Shake */
+@keyframes shake{
+0%{transform:translate(5px,5px);}
+25%{transform:translate(-5px,5px);}
+50%{transform:translate(5px,-5px);}
+75%{transform:translate(-5px,-5px);}
+100%{transform:translate(0,0);}
+}
+</style>
+</head>
+
+<body>
+
+<h1>Kuchu Puchu ❤️</h1>
+<div id="message">In every universe… it’s only you. 💕</div>
+
+<h2>Will you be my Valentine? 💍</h2>
+
+<button class="yes" id="yesBtn" onclick="acceptLove()">YES 💖</button>
+<button class="no" id="noBtn" onmouseover="legendaryNo()">NO 😈</button>
+
+<script>
+
+/* Create Moving Hearts */
+function createHeart(){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+20)+"px";
+heart.style.animationDuration=(Math.random()*5+8)+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},12000);
+}
+
+/* Start immediately and keep generating */
+setInterval(createHeart,500);
+for(let i=0;i<10;i++){ createHeart(); }
+
+/* Dramatic NO */
+let drama=0;
+let yesSize=1;
+
+function legendaryNo(){
+let btn=document.getElementById("noBtn");
+drama++;
+
+btn.style.left=Math.random()*(window.innerWidth-150)+"px";
+btn.style.top=Math.random()*(window.innerHeight-80)+"px";
+
+yesSize+=0.2;
+document.getElementById("yesBtn").style.transform="scale("+yesSize+")";
+
+if(drama==1){
+show("Are you sure?");
+}
+else if(drama==2){
+shake();
+show("My heart is breaking...");
+}
+else if(drama==3){
+shake();
+show("This may hurt true love.");
+}
+else if(drama>=4){
+show("NO option removed.");
+btn.style.display="none";
+}
+}
+
+function show(text){
+document.getElementById("message").innerHTML=text;
+}
+
+function shake(){
+document.body.style.animation="shake 0.4s";
+setTimeout(()=>{
+document.body.style.animation="";
+},400);
+}
+
+function acceptLove(){
+document.body.innerHTML=`
+<h1 style="margin-top:200px;">
+She Said YES ❤️<br><br>
+Kuchu Puchu + Abhishek = Forever ♾️<br><br>
+Forever Yours,<br>
+Abhishek 💖
+</h1>`;
+}
+
+</script>
+
+</body>
+</html>
